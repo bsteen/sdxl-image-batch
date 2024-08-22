@@ -1,5 +1,5 @@
-# Stable Diffusion XL (SDXL) Image Batch Generator
-A Python script that uses [SDXL](https://stability.ai/stable-image) to generate batches of images based on your prompt.
+# Stable Diffusion XL Image Batch Generator
+A Python script that uses [Stable Diffusion XL](https://stability.ai/stable-image) (SDXL) to generate batches of images based on your prompt.
 
 This script supports SDXL base 1.0 and SDXL refiner 1.0 models. You can also load LoRAs for the base model.
 The [`diffusers`](https://github.com/huggingface/diffusers) library is set to offline mode in the script, so you have to manually download models.
