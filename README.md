@@ -5,7 +5,7 @@ This script supports SDXL base 1.0 and SDXL refiner 1.0 models. You can also loa
 The [`diffusers`](https://github.com/huggingface/diffusers) library is set to offline mode in the script, so you have to manually download models.
 Stable Diffusion Video (SVD) and SVD XT are implemented but not currently working.
 
-Tested and working on Linux Mint 21.3 with a NVIDIA GTX 1070 (8GB VRAM).
+I made this script around the time SDXL first came out and decided to upload it now. Tested and working on Linux Mint 21.3 with a NVIDIA GTX 1070 (8GB VRAM). 
 
 **Copyright 2024, Benjamin Steenkamer - see LICENSE for details**
 
@@ -23,6 +23,7 @@ This script supports:
 # VRAM Limitations
 - This script is optimized to run on "low" VRAM GPUs like the NVIDIA GTX 1070 with *only* 8 GB of VRAM
 - If you have more VRAM than this, you can enable an extra feature to improve processing speed: comment out the line `enable_model_cpu_offload()` and uncomment `to("cuda")`
+- I do not know what will happen if you try running this script with less than 8 GB of VRAM
 
 # File Locations
 - `models/`: Place SDXL models here, each model must be in its own sub-folder
