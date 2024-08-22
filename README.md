@@ -27,7 +27,7 @@ This script supports:
 # File Locations
 - `models/`: Place SDXL models here, each model must be in its own sub-folder
 - `models/lora/`: Place LoRA safe tensor files here
-- `outputs/`: Finished and latent (intermediate step) images will be saved here
+- `outputs/`: Finished and latent (intermediate step) images will be saved here; output name is `seed-random_uuid.png`
 
 # Model Links
 - [SDXL Base 1.0](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/tree/main): Download all folders and `model_index.json`; you don't need the 3 big safetensors
