@@ -57,10 +57,10 @@ class SDXLModel():
             self.model_pipe.fuse_lora()     # fuses LoRAs to UNet and text encoder; can speed-up inference steps and lower VRAM usage
         print("Active adapters:", self.model_pipe.get_active_adapters())
 
-        # self.model_pipe.to("cuda")               # FIXME CUDA OOM error, try setting max_split_size_mb to avoid fragmentation, see documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
-                                                   # Tried doing this at start and still OOM: os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "garbage_collection_threshold:0.6,max_split_size_mb:128"
+        # self.model_pipe.to("cuda")               # FIXME CUDA OOM error, try setting `max_split_size_mb` to avoid fragmentation, see documentation for Memory Management and `PYTORCH_CUDA_ALLOC_CONF`
+                                                   # Tried doing this at start and still OOM: `os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "garbage_collection_threshold:0.6,max_split_size_mb:128"`
                                                    # On certain batch sizes, it seems to work, but then always fails when offloading the final result from GPU to CPU
-        self.model_pipe.enable_model_cpu_offload() # When limited by GPU VRAM, enable cpu offloading instead of using `.to("cuda")`
+        self.model_pipe.enable_model_cpu_offload() # When limited by VRAM, enable CPU offloading instead of using `.to("cuda")`
 
         # Enable memory efficiency settings
         if "svd" in self.model_dir:
@@ -151,7 +151,7 @@ class SDXLModel():
 
     def generate_and_save_outputs(self, prompt, negative_prompt=None, seed=None, images_per_prompt=1, n_sets=1, inference_steps=40, source_file_name=None, **kwargs):
         """
-        `kwargs` is needed for differences between arguments in pipes
+        `kwargs` is needed for differences between pipe arguments
         """
         if seed is None:
             seed = random.randint(0, 2**32-1)
@@ -176,7 +176,7 @@ class SDXLBase(SDXLModel):
 
 class SDXLInpainting(SDXLModel):
     """
-    White pixels in the mask will be repainted, while black pixels will be preserved.
+    White pixels in the mask will be repainted, black pixels will be preserved.
     """
     def __init__(self, lora_dicts=[]):
         super().__init__(lora_dicts)
@@ -378,7 +378,7 @@ def make_gif(input_folder, fps=24):
 
 
 if __name__ == "__main__":
-    seed = None    # None = random initial seed will be used, otherwise enter an integer here; each image will get new seed of `seed += 1`
+    seed = None    # None for random initial seed, otherwise enter an integer; each subsequent image will get a seed of `seed += 1`
     prompt = "Astronaut riding a (white horse)1.3 on the moon" # Enter your prompt here; you can do weighted tokens as shown
     negative_prompt = "cartoon, (low quality)1.2"              # Enter your negative prompt here (things you don't want in the image); you can do weighted tokens as shown
 
